@@ -28,7 +28,7 @@ function App() {
                         <pointLight position={[-10, -10, -10]} intensity={0.4} color="#00d4ff" />
 
                         <EnergyStack
-                            position={isMobile ? [-1.0, -2.5, 0] : [-1, 0, 0]}
+                            position={isMobile ? [-1.8, -2.5, 0] : [-1, 0, 0]}
                             onLayerSelect={setSelectedLayerIndex}
                             hoveredLayer={hoveredLayer}
                             onLayerHover={setHoveredLayer}
