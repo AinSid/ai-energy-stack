@@ -22,7 +22,7 @@ function App() {
         <div className="w-full h-screen bg-brand-dark relative overflow-hidden">
             {/* Top Right About Link */}
             <button
-                className="absolute top-6 right-6 z-20 text-white/70 hover:text-white font-mono text-xs tracking-widest uppercase transition-colors"
+                className="absolute top-6 right-6 z-20 text-white/70 hover:text-white font-mono text-sm tracking-widest uppercase transition-colors"
                 onClick={() => setShowAbout(true)}
             >
                 [ About ]
@@ -70,15 +70,15 @@ function App() {
                     <p className="text-gray-300 text-sm md:text-lg leading-relaxed mb-4">
                         <strong className="text-white font-medium">The primary bottleneck to intelligence today is power.</strong> We are visualizing the $6.7 trillion machine required to turn electricity into thought, mapping the bottlenecks from the nanometer-scale chip to the gigawatt-scale nuclear reactor. This is the physical reality behind the digital revolution.
                     </p>
-                    <div className="flex flex-col space-y-2">
+                    <div className="flex flex-col space-y-4 mt-8">
                         <button
                             className="text-brand-blue font-medium text-xs uppercase tracking-widest hover:text-white transition-colors text-left"
                             onClick={() => setShowAbout(true)}
                         >
-                            Read the full report →
+                            Learn more about this project.
                         </button>
-                        <p className="text-gray-500 font-medium text-[10px] md:text-xs uppercase tracking-widest animate-pulse mt-4">
-                            Click any layer to explore
+                        <p className="text-gray-500 font-medium text-[10px] md:text-xs uppercase tracking-widest animate-pulse">
+                            Click a layer to explore details →
                         </p>
                     </div>
                 </div>
@@ -229,26 +229,29 @@ function App() {
                                 </p>
 
                                 <div className="space-y-6 md:space-y-8">
-                                    <div>
-                                        <h4 className="text-xs md:text-sm font-bold text-white mb-2 md:mb-3 flex items-center">
-                                            <span className="w-2 h-2 rounded-full mr-2 bg-brand-blue"></span>
-                                            THE CHALLENGE
-                                        </h4>
-                                        <p className="text-sm md:text-base text-gray-400 leading-relaxed">
-                                            Scaling this layer faces significant physical/economic hurdles.
-                                            We need 10x improvement here to support next-gen models.
-                                        </p>
-                                    </div>
+                                    {activeLayer.challenge && (
+                                        <div>
+                                            <h4 className="text-xs md:text-sm font-bold text-white mb-2 md:mb-3 flex items-center">
+                                                <span className="w-2 h-2 rounded-full mr-2 bg-brand-blue"></span>
+                                                THE CHALLENGE
+                                            </h4>
+                                            <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                                                {activeLayer.challenge}
+                                            </p>
+                                        </div>
+                                    )}
 
-                                    <div>
-                                        <h4 className="text-xs md:text-sm font-bold text-white mb-2 md:mb-3 flex items-center">
-                                            <span className="w-2 h-2 rounded-full mr-2 bg-brand-hot"></span>
-                                            BOTTLENECK STATUS
-                                        </h4>
-                                        <p className="text-sm md:text-base text-gray-400 leading-relaxed">
-                                            Currently operating at near-capacity. Lead times for components in this layer range from 18-36 months.
-                                        </p>
-                                    </div>
+                                    {activeLayer.bottleneck && (
+                                        <div>
+                                            <h4 className="text-xs md:text-sm font-bold text-white mb-2 md:mb-3 flex items-center">
+                                                <span className="w-2 h-2 rounded-full mr-2 bg-brand-hot"></span>
+                                                BOTTLENECK STATUS
+                                            </h4>
+                                            <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                                                {activeLayer.bottleneck}
+                                            </p>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </motion.div>
