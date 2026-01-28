@@ -61,7 +61,7 @@ function App() {
 
             <div className={`absolute top-0 left-0 w-full p-6 md:p-16 z-10 pointer-events-none transition-opacity duration-500 ${selectedLayerIndex !== null || showAbout ? 'opacity-0' : 'opacity-100'} ${isMobile ? 'bg-gradient-to-b from-black via-black/80 to-transparent pb-32' : ''}`}>
                 <div
-                    className="cursor-pointer group mb-6 inline-block"
+                    className="cursor-pointer group mb-6 inline-block pointer-events-auto"
                     onClick={() => setShowAbout(true)}
                 >
                     <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-2 uppercase group-hover:to-white transition-all">
