@@ -37,7 +37,7 @@ function App() {
                         <pointLight position={[-10, -10, -10]} intensity={0.4} color="#00d4ff" />
 
                         <EnergyStack
-                            position={isMobile ? [-1.8, -3.2, 0] : [-1, 0, 0]}
+                            position={isMobile ? [-1.8, -2.8, 0] : [-1, 0, 0]}
                             onLayerSelect={setSelectedLayerIndex}
                             hoveredLayer={hoveredLayer}
                             onLayerHover={setHoveredLayer}
@@ -76,22 +76,22 @@ function App() {
                     <p className="text-gray-300 text-sm md:text-lg leading-relaxed mb-4">
                         <strong className="text-white font-medium">The primary bottleneck to intelligence today is power.</strong> We are visualizing the $6.7 trillion machine required to turn electricity into thought, mapping the bottlenecks from the nanometer-scale chip to the gigawatt-scale nuclear reactor. This is the physical reality behind the digital revolution.
                     </p>
-                    <div className="flex flex-col space-y-8 mt-8">
+                    <div className="flex flex-col space-y-4 md:space-y-8 mt-4 md:mt-8">
                         <button
                             className="text-brand-blue font-medium text-xs uppercase tracking-widest hover:text-white transition-colors text-left"
                             onClick={() => setShowAbout(true)}
                         >
-                            Learn more about this project.
+                            {isMobile ? "Learn more" : "Learn more about this project."}
                         </button>
                         <p className="text-gray-500 font-medium text-[10px] md:text-xs uppercase tracking-widest animate-pulse">
-                            Click a layer to explore details →
+                            {isMobile ? "Click a layer to explore" : "Click a layer to explore details →"}
                         </p>
                     </div>
                 </div>
             </div>
 
             {/* Mobile Labels - Right Side */}
-            <div className={`md:hidden absolute right-4 top-[50%] -translate-y-1/2 z-10 pointer-events-none transition-opacity duration-500 ${selectedLayerIndex !== null || showAbout ? 'opacity-0' : 'opacity-100'}`}>
+            <div className={`md:hidden absolute right-4 top-[55%] -translate-y-1/2 z-10 pointer-events-none transition-opacity duration-500 ${selectedLayerIndex !== null || showAbout ? 'opacity-0' : 'opacity-100'}`}>
                 <div className="flex flex-col space-y-8 pointer-events-auto items-end">
                     {layerInfo.map((layer, index) => (
                         <div
