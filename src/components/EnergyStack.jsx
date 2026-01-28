@@ -67,11 +67,11 @@ function Layer({ position, color, layerIndex, width = 2.4, height = 0.12, depth 
     )
 }
 
-export default function EnergyStack({ onLayerSelect, hoveredLayer, onLayerHover }) {
+export default function EnergyStack({ onLayerSelect, hoveredLayer, onLayerHover, ...props }) {
     const group = useRef()
 
     return (
-        <group ref={group} position={[-1, 0, 0]}>
+        <group ref={group} {...props}>
             <group position={[0.5, 0, 0]}>
                 <Layer layerIndex={0} position={[0, 1.8, 0]} width={1.8} height={0.10} depth={1.8} color="#bbbbbb" glow onSelect={onLayerSelect} isHovered={hoveredLayer === 0} onHover={onLayerHover} />
                 <Layer layerIndex={1} position={[0, 1.35, 0]} width={2.2} height={0.12} depth={2.2} color="#ff0000" onSelect={onLayerSelect} isHovered={hoveredLayer === 1} onHover={onLayerHover} />

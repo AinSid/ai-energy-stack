@@ -22,7 +22,7 @@ function App() {
         <div className="w-full h-screen bg-brand-dark relative overflow-hidden">
             {/* Top Right About Link */}
             <button
-                className="absolute top-6 right-6 z-20 text-white/70 hover:text-white font-mono text-sm tracking-widest uppercase transition-colors"
+                className="hidden md:block absolute top-6 right-6 z-20 text-white/70 hover:text-white font-mono text-sm tracking-widest uppercase transition-colors"
                 onClick={() => setShowAbout(true)}
             >
                 [ About ]
@@ -37,7 +37,7 @@ function App() {
                         <pointLight position={[-10, -10, -10]} intensity={0.4} color="#00d4ff" />
 
                         <EnergyStack
-                            position={isMobile ? [-1.8, -2.5, 0] : [-1, 0, 0]}
+                            position={isMobile ? [-1.8, -3.2, 0] : [-1, 0, 0]}
                             onLayerSelect={setSelectedLayerIndex}
                             hoveredLayer={hoveredLayer}
                             onLayerHover={setHoveredLayer}
@@ -157,7 +157,7 @@ function App() {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             transition={{ type: "spring", duration: 0.5 }}
-                            className="relative w-full max-w-4xl max-h-[90vh] bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl overflow-y-auto p-8 md:p-12"
+                            className="relative w-full max-w-4xl max-h-[85vh] bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl overflow-y-auto p-8 md:p-12 z-50"
                             onClick={(e) => e.stopPropagation()}
                         >
                             <button
@@ -204,7 +204,7 @@ function App() {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             transition={{ type: "spring", duration: 0.5 }}
-                            className="relative w-full max-w-5xl h-[82vh] md:h-[80vh] bg-black/90 border border-gray-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row"
+                            className="relative w-full max-w-5xl h-[82vh] md:h-[80vh] bg-black/90 border border-gray-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row z-50"
                             onClick={(e) => e.stopPropagation()}
                         >
                             <button
@@ -224,8 +224,7 @@ function App() {
                                 </div>
 
                                 <div className="mt-4 md:mt-12 flex md:block items-baseline gap-4">
-                                    <div className="text-2xl md:text-4xl font-mono text-white font-bold mb-1">{activeLayer.stat}</div>
-                                    <div className="text-[10px] md:text-xs text-gray-500 font-mono uppercase tracking-wider">Estimated Scale</div>
+                                    <div className="text-xl md:text-4xl font-mono text-white font-bold mb-1">{activeLayer.stat}</div>
                                 </div>
                             </div>
 
@@ -257,9 +256,9 @@ function App() {
                                                         </div>
                                                     )}
                                                     <div className="overflow-x-auto">
-                                                        <table className="w-full text-left text-sm">
+                                                        <table className="w-full text-left text-[10px] md:text-sm">
                                                             <thead>
-                                                                <tr className="bg-white/5 text-gray-400 font-mono text-xs uppercase">
+                                                                <tr className="bg-white/5 text-gray-400 font-mono text-[10px] md:text-xs uppercase">
                                                                     {block.headers.map((header, i) => (
                                                                         <th key={i} className="px-4 py-3 font-medium whitespace-nowrap">
                                                                             {header}

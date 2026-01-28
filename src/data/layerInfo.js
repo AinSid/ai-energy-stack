@@ -29,6 +29,21 @@ export const layerInfo = [
                     ["Share of Lifecycle CO2", "~40%", "~60% and growing"],
                     ["Economic Driver", "CAPEX (One-time asset creation)", "OPEX (Cost of Goods Sold)"]
                 ]
+            },
+            {
+                type: "text",
+                title: "The Agentic Multiplier",
+                content: "Beyond simple reasoning, the industry is moving toward Agentic AI workflows. Unlike a chatbot that provides a single answer to a single question, an AI agent is designed to perform multi-step tasks autonomously. An agentic workflow involves planning, acting, reflecting, and looping until a goal is achieved. Industry analysis suggests that a fully autonomous agentic workflow could consume 25 times more tokens than a standard interaction. This creates a 'Token Multiplier' effect where a single user request triggers a cascade of internal queries, massively inflating the energy cost per task. This shift changes the economics of the stack. The cost of intelligence is moving from a Capital Expenditure (CAPEX) model, where companies pay once to train a model, to an Operating Expenditure (OPEX) model, where the cost scales linearly with every second the model spends 'thinking.' As models like OpenAI's o1 and DeepSeek-R1 become standard, the energy density per user session will increase, potentially offsetting efficiency gains made in hardware."
+            },
+            {
+                type: "table",
+                title: "The Cost of Thinking (Inference Tiers)",
+                headers: ["Interaction Type", "Description", "Estimated Energy Factor"],
+                rows: [
+                    ["Standard Query", "Direct answer (GPT-4o)", "1x (Baseline)"],
+                    ["Reasoning Query", "Chain-of-Thought (o1/R1)", "10x - 30x"],
+                    ["Agentic Task", "Autonomous loops & planning", "25x - 100x"]
+                ]
             }
         ]
     },
@@ -62,6 +77,22 @@ export const layerInfo = [
                     ["Nvidia B200", "2025", "1,000W - 1,200W", "Liquid Mandatory (Dense)"],
                     ["AMD MI355X", "2025", "1,400W", "Liquid Mandatory"]
                 ]
+            },
+            {
+                type: "text",
+                title: "The Packaging Bottleneck",
+                content: "While the GPU die itself grabs headlines, the true physical constraint in the supply chain is often the advanced packaging. Technologies like TSMC's Chip-on-Wafer-on-Substrate (CoWoS) are required to stitch the logic die to the High Bandwidth Memory (HBM) stacks. This 2.5D packaging process is complex and capacity-constrained. Forecasts indicate that CoWoS capacity must double annually through 2026 to meet the demand for AI accelerators. Furthermore, the memory architecture is becoming a dominant power consumer. The shift to HBM3e memory provides massive bandwidth (up to 8 TB/s on the B200) but also increases the thermal load. As memory stacks grow higher (12-hi to 16-hi stacks), the thermal resistance increases, making the cooling of the memory modules just as critical as the cooling of the logic die. Alternative architectures like the Cerebras Wafer Scale Engine (CS-3) avoid this packaging bottleneck by using an entire silicon wafer as a single chip, but this creates a unique challenge of powering and cooling a singular 23,000-watt device."
+            },
+            {
+                type: "table",
+                title: "Chip Architecture & Memory Comparison",
+                headers: ["Chip", "Memory Capacity", "Bandwidth", "Packaging Technology"],
+                rows: [
+                    ["Nvidia H100", "80 GB HBM3", "3.35 TB/s", "TSMC CoWoS-S"],
+                    ["Nvidia B200", "192 GB HBM3e", "8.0 TB/s", "TSMC CoWoS-L"],
+                    ["AMD MI325X", "256 GB HBM3e", "6.0 TB/s", "2.5D Silicon Interposer"],
+                    ["Cerebras CS-3", "44 GB (On-Chip)", "21 PB/s", "Wafer Scale (No Package)"]
+                ]
             }
         ]
     },
@@ -94,6 +125,20 @@ export const layerInfo = [
                     ["Legacy Cloud", "7-10 kW", "Standard Air (CRAC)"],
                     ["Early AI (2023)", "40 kW", "High Performance Air"],
                     ["Frontier AI (2026)", "120 kW", "Liquid (Direct-to-Chip)"]
+                ]
+            },
+            {
+                type: "text",
+                title: "48V Power and Leakage Risks",
+                content: "Delivering 120 kW to a single rack requires a fundamental change in electrical distribution. Data centers are shifting from 12-volt to 48-volt bus bars. Higher voltage reduces the current required to deliver the same amount of power (Power = Voltage x Current). Lower current minimizes resistive power loss and allows for thinner copper bus bars, which saves critical weight and space inside the dense rack chassis. The transition to liquid cooling also introduces a new mechanical risk: leakage. The industry is adopting 'blind mate' liquid connectors that allow server blades to be inserted into the rack manifold without manual plumbing connections. These connectors must maintain a zero-leakage standard over thousands of mating cycles. A single coolant leak in a high-voltage rack could be catastrophic. This has driven strict manufacturing tolerances for OCP ORV3 compliant connectors to ensure reliability."
+            },
+            {
+                type: "table",
+                title: "Power Distribution Efficiency",
+                headers: ["Bus Voltage", "Current for 1000W", "Resistive Loss", "Cable Thickness"],
+                rows: [
+                    ["12 Volt", "83.3 Amps", "High", "Thick / Heavy"],
+                    ["48 Volt", "20.8 Amps", "Low (~16x less loss)", "Thin / Light"]
                 ]
             }
         ]
@@ -129,6 +174,21 @@ export const layerInfo = [
                     ["Construction & Shell", "~$1.0 Trillion"],
                     ["Total", "~$6.7 Trillion"]
                 ]
+            },
+            {
+                type: "text",
+                title: "Heat Reuse and Backup Power",
+                content: "The high operating temperatures of AI chips (often running at 60°C or higher) have turned data centers into viable heat sources for district heating. Unlike legacy servers that produced low-grade heat, liquid-cooled AI racks produce hot water that can be piped directly into municipal heating networks. Projects in Dublin and Finland are already utilizing this waste heat to warm nearby university campuses and homes, turning a waste product into a municipal asset. Backup power systems are also decarbonizing. Operators are moving away from traditional diesel generators toward Hydrotreated Vegetable Oil (HVO), a renewable fuel that drops into existing engines but reduces net carbon emissions by up to 90%. Additionally, Battery Energy Storage Systems (BESS) are being deployed to handle short-duration peak loads, reducing the need to fire up generators during minor grid fluctuations."
+            },
+            {
+                type: "table",
+                title: "Backup Power Technologies",
+                headers: ["Technology", "Primary Use Case", "Carbon Impact", "Trend"],
+                rows: [
+                    ["Diesel Gen", "Long-duration outages", "High", "Phasing out / Legacy"],
+                    ["HVO Fuel", "Sustainable backup", "Low (-90% CO2)", "Rapid adoption"],
+                    ["BESS (Battery)", "Peak shaving / Short backup", "Zero (at point of use)", "High growth"]
+                ]
             }
         ]
     },
@@ -157,6 +217,21 @@ export const layerInfo = [
                 type: "text",
                 title: "Regulatory Moats",
                 content: "In late 2024, the Federal Energy Regulatory Commission (FERC) rejected a deal between Amazon and Talen Energy to co-locate a data center directly at a nuclear plant. This ruling signaled that behind-the-meter deals will face stiff regulatory resistance. The regulators are concerned that taking existing power plants off the grid for private AI use raises costs for regular consumers."
+            },
+            {
+                type: "text",
+                title: "Grid Enhancing Technologies (GETs)",
+                content: "Because building new transmission lines takes a decade, utilities are turning to Grid Enhancing Technologies (GETs) to squeeze more capacity out of existing wires. Dynamic Line Rating (DLR) uses sensors to monitor real-time wind speed and temperature on power lines. On cool or windy days, these lines can safely carry 30% to 40% more current than their conservative static rating allows. Data centers are also evolving into Virtual Power Plants (VPPs). By integrating their massive battery backups and flexible compute workloads with the grid, they can provide demand response services. During grid emergencies, a data center can switch to 'island mode' (running entirely on its own batteries or generators) to free up hundreds of megawatts of capacity for the public grid, acting as a stabilizer rather than just a load."
+            },
+            {
+                type: "table",
+                title: "Capacity Gains from GETs",
+                headers: ["Technology", "Mechanism", "Potential Capacity Gain"],
+                rows: [
+                    ["Static Rating", "Fixed conservative limit", "0% (Baseline)"],
+                    ["Ambient Adjusted", "Seasonal temperature adjustments", "15 - 25%"],
+                    ["Dynamic Line Rating", "Real-time wind/temp sensors", "30 - 40%"]
+                ]
             }
         ]
     },
@@ -190,6 +265,22 @@ export const layerInfo = [
                     ["Nuclear (SMR)", "2030+", "Zero", "High (Factory built)"],
                     ["Geothermal", "Now", "Zero", "Medium (Geo dependent)"],
                     ["Natural Gas", "Now", "High", "High (But high carbon)"]
+                ]
+            },
+            {
+                type: "text",
+                title: "Geothermal and Hydrogen",
+                content: "Enhanced Geothermal Systems (EGS) offer a distinct advantage over wind and solar: a capacity factor exceeding 90%. New drilling techniques derived from the oil and gas industry allow companies like Fervo Energy to create artificial reservoirs in hot rock, enabling baseload clean power in regions previously thought unsuitable for geothermal. Natural gas remains a critical bridge fuel, but the technology is evolving. Manufacturers like GE Vernova are deploying gas turbines capable of burning a blend of natural gas and hydrogen. These units can currently handle up to 50% hydrogen by volume, with a roadmap to 100% capability. This allows data centers to build gas infrastructure today that can transition to green hydrogen fuel as supply chains mature, future-proofing their massive investments."
+            },
+            {
+                type: "table",
+                title: "Capacity Factor Comparison",
+                headers: ["Energy Source", "Capacity Factor (Uptime)", "Reliability for AI"],
+                rows: [
+                    ["Geothermal", "> 90%", "Excellent"],
+                    ["Nuclear", "> 92%", "Excellent"],
+                    ["Wind", "35% - 45%", "Poor (Requires Storage)"],
+                    ["Solar PV", "20% - 30%", "Poor (Requires Storage)"]
                 ]
             }
         ]
