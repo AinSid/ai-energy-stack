@@ -2,7 +2,7 @@ import React, { Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Environment, Stars } from '@react-three/drei'
 import { AnimatePresence, motion } from 'framer-motion'
-import EnergyStack from './components/EnergyStack'
+import PowerStack from './components/PowerStack'
 import { layerInfo } from './data/layerInfo'
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
                         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
                         <pointLight position={[-10, -10, -10]} intensity={0.4} color="#00d4ff" />
 
-                        <EnergyStack
+                        <PowerStack
                             position={isMobile ? [-2.0, -1.0, 0] : [-1, 0, 0]}
                             onLayerSelect={setSelectedLayerIndex}
                             hoveredLayer={hoveredLayer}
@@ -66,7 +66,7 @@ function App() {
                     onClick={() => setShowAbout(true)}
                 >
                     <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-2 uppercase group-hover:to-white transition-all">
-                        THE AI ENERGY STACK
+                        THE AI POWER STACK
                     </h1>
                     <p className="text-brand-blue text-xs md:text-sm font-mono uppercase tracking-[0.2em] group-hover:text-brand-blue/80 transition-colors">
                         The Physics of Intelligence
@@ -176,7 +176,7 @@ function App() {
                                     The global technology sector is navigating a fundamental regime change. For the past twenty years, the digital economy was defined by software efficiency and the virtualization of resources. As of 2026, the paradigm has inverted. The rise of Generative AI and Large Language Models (LLMs) has transitioned the industry into a phase of massive physical capital intensity. The primary constraints are no longer code or silicon availability. They are now thermodynamics, electron delivery, and construction supply chains.
                                 </p>
                                 <p>
-                                    This project maps the AI Energy Stack, which is the vertically integrated value chain required to power the next generation of intelligence. We estimate that global data center capital expenditures (CAPEX) will cumulatively reach $6.7 trillion by 2030. This investment wave is driven by a singular reality. The computational density required for frontier model training and inference has outpaced the existing capabilities of the global power grid and traditional air-cooled facility designs.
+                                    This project maps the AI Power Stack, which is the vertically integrated value chain required to power the next generation of intelligence. We estimate that global data center capital expenditures (CAPEX) will cumulatively reach $6.7 trillion by 2030. This investment wave is driven by a singular reality. The computational density required for frontier model training and inference has outpaced the existing capabilities of the global power grid and traditional air-cooled facility designs.
                                 </p>
                                 <p>
                                     From the microscopic architecture of the transistor to the macroscopic regulation of the electrical grid, this visualization tracks where the capital is flowing, where the bottlenecks are forming, and why the technology sector is rapidly becoming the world's largest financier of nuclear energy.

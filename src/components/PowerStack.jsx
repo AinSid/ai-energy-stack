@@ -67,7 +67,7 @@ function Layer({ position, color, layerIndex, width = 2.4, height = 0.12, depth 
     )
 }
 
-export default function EnergyStack({ onLayerSelect, hoveredLayer, onLayerHover, ...props }) {
+export default function PowerStack({ onLayerSelect, hoveredLayer, onLayerHover, ...props }) {
     const group = useRef()
 
     return (
