@@ -224,34 +224,61 @@ function App() {
                             </div>
 
                             <div className="w-full md:w-2/3 p-6 md:p-12 overflow-y-auto flex-1">
-                                <p className="text-sm md:text-base text-gray-300 leading-relaxed mb-6 md:mb-8">
-                                    {activeLayer.description}
-                                </p>
-
-                                <div className="space-y-6 md:space-y-8">
-                                    {activeLayer.challenge && (
-                                        <div>
-                                            <h4 className="text-xs md:text-sm font-bold text-white mb-2 md:mb-3 flex items-center">
-                                                <span className="w-2 h-2 rounded-full mr-2 bg-brand-blue"></span>
-                                                THE CHALLENGE
-                                            </h4>
-                                            <p className="text-sm md:text-base text-gray-400 leading-relaxed">
-                                                {activeLayer.challenge}
-                                            </p>
-                                        </div>
-                                    )}
-
-                                    {activeLayer.bottleneck && (
-                                        <div>
-                                            <h4 className="text-xs md:text-sm font-bold text-white mb-2 md:mb-3 flex items-center">
-                                                <span className="w-2 h-2 rounded-full mr-2 bg-brand-hot"></span>
-                                                BOTTLENECK STATUS
-                                            </h4>
-                                            <p className="text-sm md:text-base text-gray-400 leading-relaxed">
-                                                {activeLayer.bottleneck}
-                                            </p>
-                                        </div>
-                                    )}
+                                <div className="space-y-8">
+                                    {activeLayer.blocks.map((block, index) => {
+                                        if (block.type === 'text') {
+                                            return (
+                                                <div key={index}>
+                                                    {block.title && block.title !== 'Overview' && block.title !== 'Simplified Overview' && (
+                                                        <h4 className="text-xs md:text-sm font-bold text-white mb-3 flex items-center uppercase tracking-wider">
+                                                            <span className={`w-2 h-2 rounded-full mr-3 ${index % 2 === 0 ? 'bg-brand-blue' : 'bg-brand-hot'}`}></span>
+                                                            {block.title}
+                                                        </h4>
+                                                    )}
+                                                    <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                                                        {block.content}
+                                                    </p>
+                                                </div>
+                                            )
+                                        } else if (block.type === 'table') {
+                                            return (
+                                                <div key={index} className="mt-8 bg-white/5 rounded-xl border border-white/10 overflow-hidden">
+                                                    {block.title && (
+                                                        <div className="bg-white/5 px-4 py-3 border-b border-white/10">
+                                                            <h4 className="text-xs font-bold text-white/90 uppercase tracking-wider">
+                                                                {block.title}
+                                                            </h4>
+                                                        </div>
+                                                    )}
+                                                    <div className="overflow-x-auto">
+                                                        <table className="w-full text-left text-sm">
+                                                            <thead>
+                                                                <tr className="bg-white/5 text-gray-400 font-mono text-xs uppercase">
+                                                                    {block.headers.map((header, i) => (
+                                                                        <th key={i} className="px-4 py-3 font-medium whitespace-nowrap">
+                                                                            {header}
+                                                                        </th>
+                                                                    ))}
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody className="divide-y divide-white/5">
+                                                                {block.rows.map((row, rIndex) => (
+                                                                    <tr key={rIndex} className="hover:bg-white/5 transition-colors">
+                                                                        {row.map((cell, cIndex) => (
+                                                                            <td key={cIndex} className={`px-4 py-3 text-gray-300 border-r border-white/5 last:border-0 ${cIndex === 0 ? 'font-medium text-white' : ''}`}>
+                                                                                {cell}
+                                                                            </td>
+                                                                        ))}
+                                                                    </tr>
+                                                                ))}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                        return null
+                                    })}
                                 </div>
                             </div>
                         </motion.div>
