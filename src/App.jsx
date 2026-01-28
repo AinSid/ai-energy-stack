@@ -60,17 +60,22 @@ function App() {
             </div>
 
             <div className={`absolute top-0 left-0 w-full p-6 md:p-16 z-10 pointer-events-none transition-opacity duration-500 ${selectedLayerIndex !== null || showAbout ? 'opacity-0' : 'opacity-100'} ${isMobile ? 'bg-gradient-to-b from-black via-black/80 to-transparent pb-32' : ''}`}>
-                <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-2 uppercase">
-                    THE AI ENERGY STACK
-                </h1>
-                <p className="text-brand-blue text-xs md:text-sm font-mono uppercase tracking-[0.2em] mb-6">
-                    The Physics of Intelligence
-                </p>
+                <div
+                    className="cursor-pointer group mb-6 inline-block"
+                    onClick={() => setShowAbout(true)}
+                >
+                    <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-2 uppercase group-hover:to-white transition-all">
+                        THE AI ENERGY STACK
+                    </h1>
+                    <p className="text-brand-blue text-xs md:text-sm font-mono uppercase tracking-[0.2em] group-hover:text-brand-blue/80 transition-colors">
+                        The Physics of Intelligence
+                    </p>
+                </div>
                 <div className="mt-4 md:mt-8 max-w-lg pointer-events-auto">
                     <p className="text-gray-300 text-sm md:text-lg leading-relaxed mb-4">
                         <strong className="text-white font-medium">The primary bottleneck to intelligence today is power.</strong> We are visualizing the $6.7 trillion machine required to turn electricity into thought, mapping the bottlenecks from the nanometer-scale chip to the gigawatt-scale nuclear reactor. This is the physical reality behind the digital revolution.
                     </p>
-                    <div className="flex flex-col space-y-4 mt-8">
+                    <div className="flex flex-col space-y-8 mt-8">
                         <button
                             className="text-brand-blue font-medium text-xs uppercase tracking-widest hover:text-white transition-colors text-left"
                             onClick={() => setShowAbout(true)}
