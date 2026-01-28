@@ -224,7 +224,7 @@ function App() {
                                 </div>
 
                                 <div className="mt-4 md:mt-12 flex md:block items-baseline gap-4">
-                                    <div className="text-xl md:text-4xl font-mono text-white font-bold mb-1">{activeLayer.stat}</div>
+                                    <div className="text-lg md:text-4xl font-mono text-white font-bold mb-1">{activeLayer.stat}</div>
                                 </div>
                             </div>
 
