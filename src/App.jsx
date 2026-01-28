@@ -54,7 +54,7 @@ function App() {
                             files="/textures/golden_gate_reflection.jpg"
                             background={false}
                             intensity={1.2}
-                            environmentRotation={[0, Math.PI / 2, 0]}
+                            environmentRotation={[0, (100 * Math.PI) / 180, 0]}
                         />
                     </Suspense>
                 </Canvas>
