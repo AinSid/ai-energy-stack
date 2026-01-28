@@ -9,6 +9,7 @@ function App() {
     const [selectedLayerIndex, setSelectedLayerIndex] = useState(null)
     const [hoveredLayer, setHoveredLayer] = useState(null)
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+    const [showAbout, setShowAbout] = useState(false)
     const activeLayer = selectedLayerIndex !== null ? layerInfo[selectedLayerIndex] : null
 
     React.useEffect(() => {
@@ -19,8 +20,16 @@ function App() {
 
     return (
         <div className="w-full h-screen bg-brand-dark relative overflow-hidden">
+            {/* Top Right About Link */}
+            <button
+                className="absolute top-6 right-6 z-20 text-white/70 hover:text-white font-mono text-xs tracking-widest uppercase transition-colors"
+                onClick={() => setShowAbout(true)}
+            >
+                [ About ]
+            </button>
+
             {/* 3D Scene */}
-            <div className={`w-full h-full transition-all duration-700 ${selectedLayerIndex !== null ? 'opacity-30 scale-95 blur-sm' : ''}`}>
+            <div className={`w-full h-full transition-all duration-700 ${selectedLayerIndex !== null || showAbout ? 'opacity-30 scale-95 blur-sm' : ''}`}>
                 <Canvas camera={{ position: isMobile ? [11, 8, 11] : [6, 4, 6], fov: isMobile ? 45 : 40 }}>
                     <Suspense fallback={null}>
                         <ambientLight intensity={0.25} />
@@ -37,7 +46,7 @@ function App() {
                         <OrbitControls
                             enableZoom={false}
                             enablePan={false}
-                            autoRotate={!selectedLayerIndex}
+                            autoRotate={!selectedLayerIndex && !showAbout}
                             autoRotateSpeed={0.5}
                         />
                         <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
@@ -50,25 +59,33 @@ function App() {
                 </Canvas>
             </div>
 
-            <div className={`absolute top-0 left-0 w-full p-6 md:p-16 z-10 pointer-events-none transition-opacity duration-500 ${selectedLayerIndex !== null ? 'opacity-0' : 'opacity-100'} ${isMobile ? 'bg-gradient-to-b from-black via-black/80 to-transparent pb-32' : ''}`}>
-                <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-4 uppercase">
+            <div className={`absolute top-0 left-0 w-full p-6 md:p-16 z-10 pointer-events-none transition-opacity duration-500 ${selectedLayerIndex !== null || showAbout ? 'opacity-0' : 'opacity-100'} ${isMobile ? 'bg-gradient-to-b from-black via-black/80 to-transparent pb-32' : ''}`}>
+                <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-2 uppercase">
                     THE AI ENERGY STACK
                 </h1>
-                <p className="text-gray-400 text-sm md:text-2xl max-w-2xl leading-relaxed font-light">
-                    Frontier AI isn't limited by code. It's limited by physics.
+                <p className="text-brand-blue text-xs md:text-sm font-mono uppercase tracking-[0.2em] mb-6">
+                    The Physics of Intelligence
                 </p>
-                <div className="mt-4 md:mt-8 max-w-lg">
-                    <p className="text-gray-300 text-sm md:text-lg leading-relaxed mb-2">
-                        This interactive guide visualizes the physical infrastructure required to power frontier AI. From GPU clusters to the power grid, these are the critical layers bridging the gap between code and physics.
+                <div className="mt-4 md:mt-8 max-w-lg pointer-events-auto">
+                    <p className="text-gray-300 text-sm md:text-lg leading-relaxed mb-4">
+                        <strong className="text-white font-medium">The primary bottleneck to intelligence today is power.</strong> We are visualizing the $6.7 trillion machine required to turn electricity into thought, mapping the bottlenecks from the nanometer-scale chip to the gigawatt-scale nuclear reactor. This is the physical reality behind the digital revolution.
                     </p>
-                    <p className="text-brand-blue font-medium text-[10px] md:text-xs uppercase tracking-widest animate-pulse">
-                        Click any layer to explore
-                    </p>
+                    <div className="flex flex-col space-y-2">
+                        <button
+                            className="text-brand-blue font-medium text-xs uppercase tracking-widest hover:text-white transition-colors text-left"
+                            onClick={() => setShowAbout(true)}
+                        >
+                            Read the full report →
+                        </button>
+                        <p className="text-gray-500 font-medium text-[10px] md:text-xs uppercase tracking-widest animate-pulse mt-4">
+                            Click any layer to explore
+                        </p>
+                    </div>
                 </div>
             </div>
 
             {/* Mobile Labels - Right Side */}
-            <div className={`md:hidden absolute right-4 top-[50%] -translate-y-1/2 z-10 pointer-events-none transition-opacity duration-500 ${selectedLayerIndex !== null ? 'opacity-0' : 'opacity-100'}`}>
+            <div className={`md:hidden absolute right-4 top-[50%] -translate-y-1/2 z-10 pointer-events-none transition-opacity duration-500 ${selectedLayerIndex !== null || showAbout ? 'opacity-0' : 'opacity-100'}`}>
                 <div className="flex flex-col space-y-8 pointer-events-auto items-end">
                     {layerInfo.map((layer, index) => (
                         <div
@@ -85,15 +102,15 @@ function App() {
             </div>
 
             {/* Fixed Labels Overlay - Desktop - Pure DOM, no 3D */}
-            <div className={`hidden md:block absolute right-[32%] top-1/2 z-10 pointer-events-none transition-opacity duration-500 ${selectedLayerIndex !== null ? 'opacity-0' : 'opacity-100'}`}>
+            <div className={`hidden md:block absolute right-[32%] top-1/2 z-10 pointer-events-none transition-opacity duration-500 ${selectedLayerIndex !== null || showAbout ? 'opacity-0' : 'opacity-100'}`}>
                 <div className="relative" style={{ height: '600px', transform: 'translateY(-50%)' }}>
                     {[
-                        { label: 'AI Compute Model', index: 0, top: '10%' },
-                        { label: 'GPU Cluster', index: 1, top: '24%' },
-                        { label: 'Rack Infrastructure', index: 2, top: '40%' },
-                        { label: 'Hyperscale Facility', index: 3, top: '56%' },
-                        { label: 'Grid Interconnect', index: 4, top: '72%' },
-                        { label: 'Generation Source', index: 5, top: '90%' },
+                        { label: 'The Model', index: 0, top: '10%' },
+                        { label: 'The Chip', index: 1, top: '24%' },
+                        { label: 'The Rack', index: 2, top: '40%' },
+                        { label: 'The Facility', index: 3, top: '56%' },
+                        { label: 'The Grid', index: 4, top: '72%' },
+                        { label: 'The Electron', index: 5, top: '90%' },
                     ].map((item) => (
                         <div
                             key={item.index}
@@ -117,7 +134,54 @@ function App() {
                 </div>
             </div>
 
-            {/* Modal Overlay */}
+            {/* About Modal */}
+            <AnimatePresence>
+                {showAbout && (
+                    <div className="absolute inset-0 z-50 flex items-center justify-center p-4">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="absolute inset-0 bg-black/80 backdrop-blur-md"
+                            onClick={() => setShowAbout(false)}
+                        />
+
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            transition={{ type: "spring", duration: 0.5 }}
+                            className="relative w-full max-w-4xl max-h-[90vh] bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl overflow-y-auto p-8 md:p-12"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <button
+                                onClick={() => setShowAbout(false)}
+                                className="absolute top-6 right-6 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                            >
+                                ✕
+                            </button>
+
+                            <h2 className="text-2xl md:text-3xl font-bold text-white mb-8 tracking-tight">
+                                Mapping the Power Usage of Artificial Intelligence
+                            </h2>
+
+                            <div className="space-y-6 text-gray-300 text-sm md:text-base leading-relaxed">
+                                <p>
+                                    The global technology sector is navigating a fundamental regime change. For the past twenty years, the digital economy was defined by software efficiency and the virtualization of resources. As of 2026, the paradigm has inverted. The rise of Generative AI and Large Language Models (LLMs) has transitioned the industry into a phase of massive physical capital intensity. The primary constraints are no longer code or silicon availability. They are now thermodynamics, electron delivery, and construction supply chains.
+                                </p>
+                                <p>
+                                    This project maps the AI Energy Stack, which is the vertically integrated value chain required to power the next generation of intelligence. We estimate that global data center capital expenditures (CAPEX) will cumulatively reach $6.7 trillion by 2030. This investment wave is driven by a singular reality. The computational density required for frontier model training and inference has outpaced the existing capabilities of the global power grid and traditional air-cooled facility designs.
+                                </p>
+                                <p>
+                                    From the microscopic architecture of the transistor to the macroscopic regulation of the electrical grid, this visualization tracks where the capital is flowing, where the bottlenecks are forming, and why the technology sector is rapidly becoming the world's largest financier of nuclear energy.
+                                </p>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
+
+            {/* Layer Modal Overlay */}
             <AnimatePresence>
                 {activeLayer && (
                     <div className="absolute inset-0 z-50 flex items-start md:items-center justify-center p-4 pt-2 md:pt-4">
