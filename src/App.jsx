@@ -308,6 +308,10 @@ function App() {
                 )}
             </AnimatePresence>
 
+            <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 z-10 pointer-events-none select-none font-mono text-[11px] tracking-[0.2em] text-white/25">
+                Siddiqui
+            </div>
+
             <div className="hidden md:block absolute bottom-6 right-6 z-10 text-right pointer-events-none">
                 <div className="text-brand-blue/60 font-mono text-[10px] tracking-wider">
                     SYSTEM STATUS: <span className="text-white/80 animate-pulse">ONLINE</span>
