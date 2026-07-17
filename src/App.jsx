@@ -1,9 +1,10 @@
 import React, { Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Environment, Stars } from '@react-three/drei'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion as Motion } from 'framer-motion'
 import PowerStack from './components/PowerStack'
 import { layerInfo } from './data/layerInfo'
+import { trackEvent } from './analytics'
 
 function App() {
     const [selectedLayerIndex, setSelectedLayerIndex] = useState(null)
@@ -11,6 +12,22 @@ function App() {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
     const [showAbout, setShowAbout] = useState(false)
     const activeLayer = selectedLayerIndex !== null ? layerInfo[selectedLayerIndex] : null
+
+    const openAbout = (clickSource) => {
+        trackEvent('about_open', { click_source: clickSource })
+        setShowAbout(true)
+    }
+
+    const openLayer = (index, clickSource) => {
+        const layer = layerInfo[index]
+
+        trackEvent('layer_open', {
+            click_source: clickSource,
+            layer_name: layer.title,
+            layer_number: index + 1,
+        })
+        setSelectedLayerIndex(index)
+    }
 
     React.useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth < 768)
@@ -23,7 +40,7 @@ function App() {
             {/* Top Right About Link */}
             <button
                 className="hidden md:block absolute top-6 right-6 z-20 text-white/70 hover:text-white font-mono text-sm tracking-widest uppercase transition-colors"
-                onClick={() => setShowAbout(true)}
+                onClick={() => openAbout('header_button')}
             >
                 [ About ]
             </button>
@@ -38,7 +55,7 @@ function App() {
 
                         <PowerStack
                             position={isMobile ? [-2.0, -1.0, 0] : [-1, 0, 0]}
-                            onLayerSelect={setSelectedLayerIndex}
+                            onLayerSelect={(index) => openLayer(index, '3d_stack')}
                             hoveredLayer={hoveredLayer}
                             onLayerHover={setHoveredLayer}
                         />
@@ -63,7 +80,7 @@ function App() {
             <div className={`absolute top-0 left-0 w-full p-6 md:p-16 z-10 pointer-events-none transition-opacity duration-500 ${selectedLayerIndex !== null || showAbout ? 'opacity-0' : 'opacity-100'} ${isMobile ? 'bg-gradient-to-b from-black via-black/80 to-transparent pb-32' : ''}`}>
                 <div
                     className="cursor-pointer group mb-6 inline-block pointer-events-auto"
-                    onClick={() => setShowAbout(true)}
+                    onClick={() => openAbout('site_title')}
                 >
                     <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-2 uppercase group-hover:to-white transition-all">
                         THE AI POWER STACK
@@ -79,7 +96,7 @@ function App() {
                     <div className="flex flex-col space-y-4 md:space-y-8 mt-4 md:mt-8">
                         <button
                             className="text-brand-blue font-medium text-xs uppercase tracking-widest hover:text-white transition-colors text-left"
-                            onClick={() => setShowAbout(true)}
+                            onClick={() => openAbout('learn_more_button')}
                         >
                             {isMobile ? "Learn more" : "Learn more about this project."}
                         </button>
@@ -97,7 +114,7 @@ function App() {
                         <div
                             key={index}
                             className="flex items-center space-x-2"
-                            onClick={() => setSelectedLayerIndex(index)}
+                            onClick={() => openLayer(index, 'mobile_label')}
                         >
                             <span className="text-white/80 text-[10px] font-mono uppercase tracking-wider text-right">{layer.title.split('. ')[1] || layer.title}</span>
                             <div className="w-6 h-[1px] bg-brand-blue/50"></div>
@@ -122,7 +139,7 @@ function App() {
                             key={item.index}
                             className={`absolute flex items-center space-x-4 cursor-pointer pointer-events-auto transition-all duration-300 ${hoveredLayer === item.index ? 'scale-105' : ''}`}
                             style={{ top: item.top, transform: 'translateY(-50%)' }}
-                            onClick={() => setSelectedLayerIndex(item.index)}
+                            onClick={() => openLayer(item.index, 'desktop_label')}
                             onMouseEnter={() => setHoveredLayer(item.index)}
                             onMouseLeave={() => setHoveredLayer(null)}
                         >
@@ -144,7 +161,7 @@ function App() {
             <AnimatePresence>
                 {showAbout && (
                     <div className="absolute inset-0 z-50 flex items-center justify-center p-4">
-                        <motion.div
+                        <Motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
@@ -152,7 +169,7 @@ function App() {
                             onClick={() => setShowAbout(false)}
                         />
 
-                        <motion.div
+                        <Motion.div
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -182,7 +199,7 @@ function App() {
                                     From the microscopic architecture of the transistor to the macroscopic regulation of the electrical grid, this visualization tracks where the capital is flowing, where the bottlenecks are forming, and why the technology sector is rapidly becoming the world's largest financier of nuclear energy.
                                 </p>
                             </div>
-                        </motion.div>
+                        </Motion.div>
                     </div>
                 )}
             </AnimatePresence>
@@ -191,7 +208,7 @@ function App() {
             <AnimatePresence>
                 {activeLayer && (
                     <div className="absolute inset-0 z-50 flex items-start md:items-center justify-center p-4 pt-2 md:pt-4">
-                        <motion.div
+                        <Motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
@@ -199,7 +216,7 @@ function App() {
                             onClick={() => setSelectedLayerIndex(null)}
                         />
 
-                        <motion.div
+                        <Motion.div
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -286,7 +303,7 @@ function App() {
                                     })}
                                 </div>
                             </div>
-                        </motion.div>
+                        </Motion.div>
                     </div>
                 )}
             </AnimatePresence>

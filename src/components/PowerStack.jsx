@@ -42,7 +42,7 @@ function Layer({ position, color, layerIndex, width = 2.4, height = 0.12, depth 
                     onHover(layerIndex);
                     document.body.style.cursor = 'pointer'
                 }}
-                onPointerOut={(e) => {
+                onPointerOut={() => {
                     setLocalHovered(false);
                     onHover(null);
                     document.body.style.cursor = 'auto'
