@@ -308,7 +308,7 @@ function App() {
                 )}
             </AnimatePresence>
 
-            <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 z-10 pointer-events-none select-none font-mono text-[11px] tracking-[0.2em] text-white/25">
+            <div className="fixed bottom-[calc(env(safe-area-inset-bottom)_+_1rem)] left-[calc(env(safe-area-inset-left)_+_1rem)] md:bottom-6 md:left-6 z-20 pointer-events-none select-none font-mono text-[12px] tracking-[0.2em] text-white/40">
                 Siddiqui
             </div>
 
