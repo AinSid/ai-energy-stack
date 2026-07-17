@@ -1,38 +1,29 @@
 # The AI Power Stack
 
-An immersive 3D visualization of the physical infrastructure required to power the next generation of artificial intelligence.
+**An interactive map of the physical infrastructure behind artificial intelligence.**
 
-## Features
-- Interactive 3D Stack (Model, Chip, Rack, Facility, Grid, Electron)
-- Detailed technical breakdowns for each layer
-- Responsive design for mobile and desktop
-- Modern aesthetics with glassmorphism and real-time reflections
+[Explore the live project →](https://www.ai-power.space)
 
-## Tech Stack
-- React + Vite
-- Three.js / React Three Fiber
-- Tailwind CSS
-- Framer Motion
+AI may feel weightless at the product layer, but every query depends on a physical chain of chips, cooling systems, data centers, electrical grids, and power generation. The AI Power Stack makes that chain visible.
 
-## Getting Started
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Run locally: `npm run dev`
-4. Build for production: `npm run build`
+The project moves through six connected layers:
 
-## Analytics
+1. **The Model** — training and inference demand
+2. **The Chip** — compute density and the thermal wall
+3. **The Rack** — power delivery and liquid cooling
+4. **The Facility** — the gigawatt-scale AI factory
+5. **The Grid** — transmission, transformers, and interconnection
+6. **The Electron** — the energy sources behind the system
 
-The production site uses Google Analytics 4 measurement ID `G-7T0B6ZT3Y0`.
+Each layer combines an interactive 3D model with a concise technical breakdown of its economics, constraints, and role in the wider stack.
 
-1. In Google Analytics, create a GA4 property and a web data stream for `https://www.ai-power.space`.
-2. If the web stream changes, update `VITE_GA_MEASUREMENT_ID` in `.env.production`.
-3. Run `npm run build` and deploy the generated site.
+## Built with
 
-Page views are collected by the Google tag. The app also sends these custom events:
+React, Three.js, React Three Fiber, Framer Motion, Tailwind CSS, and Vite.
 
-- `layer_open`: includes `layer_name`, `layer_number`, and `click_source`.
-- `about_open`: includes `click_source`.
+## Run locally
 
-To break reports down by layer or click location, add `layer_name` and `click_source` as event-scoped custom dimensions in GA4 under **Admin → Data display → Custom definitions**.
-
-Vite embeds the production measurement ID at build time.
+```bash
+npm install
+npm run dev
+```
